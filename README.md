@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# Frontend Mentor - Intro component with sign up form solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my solution to the [Intro component with sign up form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/intro-component-with-signup-form-5cf91bd49edda32581d28fd1). Frontend Mentor challenges help you improve your coding skills by building realistic projects...
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [My Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### The challenge
 
-### `npm test`
+Users should be able to:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- View the optimal layout for the site depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Receive an error message when the `form` is submitted if:
+  - Any `input` field is empty. The message for this error should say *"[Field Name] cannot be empty"*
+  - The email address is not formatted correctly (i.e. a correct email address should have this structure: `name@host.tld`). The message for this error should say *"Looks like this is not an email"*
 
-### `npm run build`
+### Screenshot
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Mobile
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![](/src/images/mb.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Desktop
 
-### `npm run eject`
+![](/src/images/dt.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Links
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Solution URL: [solution URL](https://github.com/roodhouse/frontend-mentor-intro)
+- Live Site URL: [live site URL](https://intro.rugh.us)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## My process
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Built with
 
-## Learn More
+- HTML5, CSS
+- Mobile-first workflow
+- React
+- Tailwind
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### What I learned
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The first useful thing I learned was the ability to place a background image and background color on the same element. Previously I had been creating extra divs, moving them around and adjusting opacity. But the below code works just fine:
 
-### Code Splitting
+```js
+<div id='wrapper' className='h-full bg-[url("./images/bg-intro-mobile.png")] bg-orange pt-[88px] px-6 pb-[68px] xl:px-0 xl:py-[121px] xl:flex xl:flex-col xl:flex-wrap xl:items-center'>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+I spent a lot of time trying to better understand React Hook Form during this project. I ran up against the default browser vaildation widget again. Previously I could work around it but with so many fields in this project the work around was not the best route. Finally I gave up and googled "chrome validation widget prevents react hook form from working on email fields". That search term was a winner and brought me to [this page](https://github.com/react-hook-form/react-hook-form/issues/1367) with the solution. It is very simple and I am happy to be done with this issue forever. Here is a SS of the error from the browser:
 
-### Analyzing the Bundle Size
+![](/src/images/chromeError.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Here is the simple code that fixes it and allows the code from React Hook Form to do its job:
 
-### Making a Progressive Web App
+```js
+<form noValidate onSubmit={handleSubmit(onSubmit, onError)}>
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The last thing I learned was how to change the text color dynamically. Set the original text color and change the text color when an error it triggered. Simple enough. But how to change the text color back to the original color when the user begins to change the input? Listener waiting for the input event was the key here:
 
-### Advanced Configuration
+```js
+function onError(e) {  
+    // When an error occurs then for each error find the warning div for that field and display it
+    for (const error in e) {
+      let errorText = document.getElementById(error);
+      console.log(errorText.value)
+      errorText.style.color = '#FF7979'
+      let errorElement = document.getElementById(error).parentElement.nextSibling
+      errorElement.style.display = 'block'
+      // Listen for when the user begins to fix the input and change the color of the text back to black
+      errorText.addEventListener('input', function(){
+        console.log('change')
+        errorText.style.color ='#3D3B48'
+      })
+    }
+  }
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Useful resources
 
-### Deployment
+- [React Hook Form help for default browser vaildation widget blocking code](https://github.com/react-hook-form/react-hook-form/issues/1367)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Author
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Website - [my site](https://rugh.us)
+- Frontend Mentor - [@roodhouse](https://www.frontendmentor.io/profile/roodhouse)
+- LinkedIn - [John Rugh](https://www.linkedin.com/in/john-m-rugh/)
