@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/new-frontend-mentor-intro-project/static/css/main.f8b2cc4d.css",
+    "main.js": "/new-frontend-mentor-intro-project/static/js/main.8fa5bd13.js",
+    "static/media/bg-intro-mobile.png": "/new-frontend-mentor-intro-project/static/media/bg-intro-mobile.02ce398270ece1769ebc.png",
+    "index.html": "/new-frontend-mentor-intro-project/index.html",
+    "static/media/icon-error.svg": "/new-frontend-mentor-intro-project/static/media/icon-error.b72f792e9c900128f5c88f10a0d8d4b7.svg",
+    "main.f8b2cc4d.css.map": "/new-frontend-mentor-intro-project/static/css/main.f8b2cc4d.css.map",
+    "main.8fa5bd13.js.map": "/new-frontend-mentor-intro-project/static/js/main.8fa5bd13.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f8b2cc4d.css",
+    "static/js/main.8fa5bd13.js"
+  ]
+}
