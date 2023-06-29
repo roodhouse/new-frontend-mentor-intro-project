@@ -5,8 +5,8 @@ import Form from './components/Form'
 
 function App() {
   return (
-    <div className="App xl:h-screen">
-      <div id='wrapper' className='h-full bg-[url("./images/bg-intro-mobile.png")] bg-orange pt-[88px] px-6 pb-[68px] xl:px-0 xl:py-[121px] xl:flex xl:flex-col xl:flex-wrap xl:items-center'>
+    <div className="App xl:h-[1002px]">
+      <div id='wrapper' className='h-full bg-[url("./images/bg-intro-mobile.png")] bg-orange pt-[88px] px-6 pb-[68px] xl:px-0 xl:py-0 xl:flex xl:flex-col xl:flex-wrap xl:items-center xl:justify-center'>
         <div id='copyWrapper' className='pb-[64px] xl:w-[525px] xl:h-full xl:flex xl:justify-center xl:items-center xl:pb-[130px]'>
           <Copy />
         </div>
